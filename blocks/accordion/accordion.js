@@ -4,7 +4,7 @@ export default function decorate(block) {
   const summaryText = block.querySelector('div > div:first-child')
     .firstElementChild.innerText;
   summaryElement.innerText = summaryText;
-  const detailsElement = document.createElement('details');
+  const detailsElement = document.createElement('details');     
   block.removeChild(block.querySelector('div > div:first-child'));
   detailsElement.appendChild(summaryElement);
   // next div element(s) form the accordion details
