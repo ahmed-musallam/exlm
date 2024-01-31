@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: https://51837-exlmconverter-dev.adobeioruntime.net/api/v1/web/main/convert
+    url: https://heron-settled-polecat.ngrok-free.app/
     type: markup
     suffix: '.md'
