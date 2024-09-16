@@ -1,0 +1,243 @@
+<div id="open-ticket-commerce-error-sec" class="commerce_msg_sec w-100 is-hidden ">
+   <p class="m-0 has-text-white	is-size-6 is-padded-top is-padded-bottom">
+      <span></span>
+   </p>
+</div>
+<div class="content p-0 active" id="open-ticket">
+   <div id="case-loader-div" class="is-hidden case-loader"></div>
+   <div class="banner_outer_sec is-padded-top-big-big is-relative resp-padding">
+      <div class="banner_sec_support open-ticket ">
+         <h2 class="set-index title is-size-2-tablet is-size-3-mobile  text-center is-margin-bottom-big-big has-text-weight-bold has-text-black">Hi ${data.username}, let's open a ticket</h2>
+         <div class="left_banner">
+            <img src="/assets/img/support/opencase-Left-banner.svg" />
+         </div>
+         <div class="right_banner">
+            <img src="/assets/img/support/open-case-Right-banner.svg" />
+         </div>
+         <div class="support_form_sec spectrum-Form w-100" id="support-open-ticket-form">
+            <div class="spectrum-Form-item is-margin-bottom-big">
+               <label class="set-index is-inline-block  has-text-weight-bold is-margin-bottom-small is-size-5-tablet  spectrum-Form-itemLabel">Select a product</label>
+               <div id="support-product-picker" class="w-100 is-fullwidth h-100  is-relative spectrumpicker-outer-box">
+                  <button class="support-form-productdata spectrum-Picker spectrum-Picker--sizeM adobe-exl-picker"
+                     aria-haspopup="listbox" selected-value="">
+                     <span class="spectrum-Picker-label is-placeholder adobe-exl-pickerSelectedOption" id="selected-ticket-product">Select a product...</span>
+                     <svg class="spectrum-Icon spectrum-UIIcon-ChevronDown100 spectrum-Picker-menuIcon" focusable="false" aria-hidden="true">
+                        <use xlink:href="#spectrum-css-icon-Chevron100" />
+                     </svg>
+                  </button>
+                  <div class="spectrum-Popover spectrum-Popover--bottom spectrum-Picker-popover adobe-exl-pickerOptions">
+                     <ul class="spectrum-Menu m-0 supportSidebarOrgPickerListWrap" id="support-openticket-selectproduct" role="listbox"></ul>
+                  </div>
+               </div>
+               <div id="product-picker-loader" class="is-relative spectrumpicker-outer-box is-margin-bottom-big transparent-box is-hidden support-sidebar-orgpicker-wrap">
+                  <div class="coveo-result-frame coveo-placeholder-result">
+                     <div class="coveo-result-row">
+                        <div class="coveo-result-cell">
+                           <div class="coveo-result-row">
+                              <div class="coveo-result-cell">
+                                 <div class="coveo-placeholder-title"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div id="ticket-status-area">
+               
+            </div>
+                  
+            <p class="ticket-tip is-hidden mt-2 has-text-centered" id="ticketTip">Tip: If your issue may be related to this, please subscribe to updates to stay informed via email.</p>
+            <div class="spectrum-Form-item is-hidden" id="admin-support-link">
+               <span> PLEASE NOTE: A small portion of our customers are experiencing issues submitting tickets through Experience League.
+                  If you encounter issues, please use the Submit a Ticket function in your
+               </span>
+               <a target="_blank" href="https://adminconsole.adobe.com">Admin console.</a>
+            </div>
+
+             <div class="spectrum-Form-item is-margin-bottom-big is-hidden is-margin-top-big-big" id="issue-reason-dropdown">
+               
+            </div>
+
+            <div class="spectrum-Form-item">
+               <div id="support-openticket-casetitle" class="is-hidden is-margin-bottom-big">
+                  <label class="spectrum-FieldLabel spectrum-Form-itemLabel set-index is-inline-block has-text-weight-bold is-margin-bottom-small is-size-5-tablet set-index">Case title</label>
+                  <input placeholder="" selected-value="" type="text" id="support-openticket-casetitle-input" maxlength="200" class="support-form-title  spectrum-Textfield-input w-100 border radius-5 is-padded-bottom-small is-padded-top-small is-padded-left-big is-padded-right-big is-size-6" />
+               </div>
+            </div>
+            <div class="spectrum-Form-item">
+               <div id="support-openticket-casedescription" class="is-hidden">
+                  <label class="set-index is-inline-block  has-text-weight-bold is-margin-bottom-small is-size-5-tablet spectrum-FieldLabel spectrum-Form-itemLabel">Case description</label>
+                  <textarea id="support-openticket-casedescription-input" maxlength="2000" selected-value="" placeholder="Tell us about your issue..." class="support-form-description spectrum-Textfield-input w-100 border radius-5 is-padded-bottom-big is-padded-top-big is-padded-left-big is-padded-right-big  is-size-6	"></textarea>
+               </div>
+            </div>
+            <div id="support-openticket-relatedarticles" class="is-hidden is-padded-top-big-big">
+               <h2 class="is-size-5	 has-text-weight-bold is-margin-bottom-small" id="support-openticket-relatedarticles-heading"><span>We think these articles might help...</span> <span id="artical-product"></span></h2>
+               <div class="radius-5 ">
+                  <div class="border radius-5 has-background-white">
+                     <ul class="m-0 list-no-style" id="support-openticket-relatedarticleslist">
+                     </ul>
+                   </div>
+                   <div id="loadMore-sec" class="has-text-centered is-hidden">
+                     <button class="mt-25  site_cta is-margin-top-big-big px-2 spectrum-Button spectrum-Button--primary spectrum-Button--sizeM is-padded-right-big is-padded-left-big " id="support-openticket-loadmore">
+                        <span class="spectrum-Button-label is-flex is-vcentered has-no-wrap has-text-weight-bold"><span>Load more</span>
+                        <span class="loader btn-loader is-margin-left is-hidden"></span>
+                        </span>
+                     </button>
+                   </div>
+               </div>
+            </div>
+            <!-- -->
+            <div id="fieldSection" class="is-hidden">
+               <div id="support-openticket-additionalhelp" class=" is-padded-top-big-big-big is-hidden">
+                  <h2 class="mb-2 light-black head-md has-text-weight-bold has-text-black is-margin-bottom-small">Still need to get in touch with us?</h2>
+                  <p class="has-text-blackest is-size-6	"><!-- Todo fix dummy text --></p>
+                  
+                  <div id="support-openticket-additionalMilohelp">
+                     <div id="render-additinal-fields"></div>
+                  </div>
+                  <div id="commerce-additional-field" class="dynamic-fields commerce-fields" >
+                  </div>
+                  <div id="workfront-contact-details" class="mb-5 is-hidden">
+                     <p class="contact-details-title">
+                        <strong>If you prefer to call us, use the phone number below</strong>
+                     </p>
+                     <p class="contact-number mb-1">Americas:  844.306.HELP(4357)</p>
+                     <p class="contact-number mb-1">Europe, Middle East and Africa :  +44 1256 274200</p>
+                     <p class="contact-number mb-1">Asia Pacific:  +61 1800 849259</p>
+                  </div>
+                  <div id="render-product-fields"></div>
+                  <div id="support-openticket-dropzone" class="is-margin-top-big my-dropzone spectrum-Dropzone  is-padded-small radius-5 is-hidden" role="region" tabindex="0">
+                     <div class=" is-dragged upload-image-sec  radius-5 is-flex is-vcentered  w-100 is-relative">
+                        <div class="support-openticket-dropzone-imageswrapper is-flex is-vcenterd"></div>
+                        <span class="w-100 is-flex is-vcentered is-justify-content-center radius-5 support-openticket-dropzone-images-span">
+                           <img src="/assets/img/support/drag-add-icon.png" class="is-margin-right-small">
+                           <span>Select attachments or drag & drop</span>
+                           <input type="file" class="drag-drop" id="support-openticket-dropzone-input" />
+                        </span>
+                     </div>
+                  </div>
+                  <div class="is-pulled-right is-flex	is-margin-top-big-big  is-vcentered" id="attachment-case">
+                     <div class="add-attachment is-flex is-vcentered" id="attachment-case-btn">
+                        <div class="is-padded-right-big font-14 lightmed-grey attachment-btn radius-5 is-margin-right-small" id="support-openticket-addAttachment">
+                           <img src="/assets/img/support/attachment.svg" class="is-margin-right-small" />
+                           <span>Add attachments</span>
+                        </div>
+                     </div>   
+                     <div class="ticket-description">
+                        <p class="is-hidden" id="ticket-description">By submitting this support ticket, you represent that you are authorized user of the services referenced above, and acknowledge and agree that Adobe (or an affiliate or contractor of Adobe) may access your organisation's instance(s) of such services, soley to provide support and resolve issue pertaining to such instance(s).</p>
+                     </div>
+                     <div class="submit-case">
+                        <button class="case-btn spectrum-Button spectrum-Button--cta spectrum-Button--sizeM" id="support-open-ticket-submitBtn">
+                           <span class="spectrum-Button-label is-padded-left-small is-padded-right-small is-flex">
+                              <span>Submit case</span>
+                              <span class="loader btn-loader is-hidden"></span>
+                           </span>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="support-openticket-casecreate-message" class="is-hidden"></div>
+            <div id="support-openticket-casecreate-errormessage" class="is-hidden"></div>
+            <div class="is-clearfix"></div>
+         </div>
+         <!-- -->
+      </div>
+   </div>
+   <!-- Trobleshooting section-->
+   <div id="support-openticket-commontopics" class="light-grey-bg">
+      <div class="container is-padded-bottom-big-big-big is-padded-top-big-big-big  resp-padding is-padded-right-big-big">
+         <h2 class="has-text-weight-bold is-size-28 is-size-27-touch is-margin-bottom-big is-size-4 light-black lh-30">Common troubleshooting topics.</h2>
+         <div class="columns row-spacing">
+            <div class="column is-4  support_popular_topics">
+               <div class="border is-padded-small radius-5 has-background-white">
+                  <h3 class="head-sm  has-text-weight-bold is-uppercase	">Experience League</h3>
+                  <ul class="list-no-style">
+                     <li>
+                        <a class="word-break" href="https://experienceleague.adobe.com/#learn" target="_blank" title="Find Experience League learning  pathways">Find Experience League learning pathways</a>
+                     </li>
+                     <li>
+                        <a class="word-break" href="https://experienceleaguecommunities.adobe.com" target="_blank" title="Join the Experience League community">Join the Experience League community</a>
+                     </li>
+                     <li>
+                        <a class="word-break" href="https://experienceleague.adobe.com/docs/experience-manager-cloud-service/content/onboarding/journey/home.html" target="_blank" title="Start your AEM guided onboarding journey">Start your AEM guided onboarding journey</a>
+                     </li>
+                     <li>
+                        <a class="word-break" href="https://experienceleague.adobe.com/docs/analytics.html" target="_blank" title="Build Analytics skills with curated help topics">Build Analytics skills with curated help topics</a>
+                     </li>
+                     <li>
+                        <a class="word-break" href="https://experienceleague.adobe.com/docs/target-learn/tutorials/overview.html" target="_blank" title="Drive Target onboarding with learning guides">Drive Target onboarding with learning guides</a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="column is-4 support_popular_topics">
+               <div class="border is-padded-small radius-5 has-background-white">
+                  <h3 class="head-sm  has-text-weight-bold is-uppercase	">Featured Articles</h3>
+                  <ul class="list-no-style">
+                     <li>
+                        <a class="word-break" href="https://experienceleague.adobe.com/docs/experience-manager-learn/sites/overview.html" title="Tune AEM Sites performance" target="_blank">Tune AEM Sites performance</a>
+                     </li>
+                     <li>
+                        <a class="word-break" href="https://experienceleague.adobe.com/docs/experience-manager-learn/forms/single-sign-on-with-okta.html" title="Apply AEM security best practices" target="_blank">Apply AEM security best practices</a>
+                     </li>
+                     <li>
+                        <a class="word-break" href="https://experienceleague.adobe.com/docs/experience-manager-learn/forms/overview.html" title="Implement AEM Forms best practices" target="_blank">Implement AEM Forms best practices</a>
+                     </li>
+                     <li>
+                        <a class="word-break" href="https://experienceleague.adobe.com/docs/audience-manager/user-guide/features/addressable-audiences.html#low-match-rates" title="Fix Audience Manager low match rates" target="_blank">Fix Audience Manager low match rates</a>
+                     </li>
+                     <li>
+                        <a class="word-break" href="https://experienceleague.adobe.com/docs/analytics-learn/tutorials/analysis-workspace/analysis-workspace-basics/analysis-workspace-introduction.html" title="View Analysis Workspace Overview" target="_blank">View Analysis Workspace Overview</a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="column is-4 support_popular_topics">
+               <div class="border is-padded-small radius-5 has-background-white">
+                  <h3 class="head-sm  has-text-weight-bold is-uppercase	">Admin Support</h3>
+                  <ul class="list-no-style">
+                     <li>
+                        <a class="word-break" href="https://helpx.adobe.com/enterprise/using/licensing.html" title="Manage license entitlements" target="_blank">Manage license entitlements</a>
+                     </li>
+                     <li>
+                        <a class="word-break" href="https://helpx.adobe.com/enterprise/using/applications.html" title="Package applications for deployment" target="_blank">Package applications for deployment</a>
+                     </li>
+                     <li>
+                        <a class="word-break" href="https://helpx.adobe.com/enterprise/using/admin-console.html" title="Navigate the Admin Console" target="_blank">Navigate the Admin Console</a>
+                     </li>
+                     <li>
+                        <a class="word-break" href="https://helpx.adobe.com/enterprise/using/users.html" title="Manage users for your organization" target="_blank">Manage users for your organization</a>
+                     </li>
+                     <li>
+                        <a class="word-break" href="https://helpx.adobe.com/enterprise/using/identity.html" title="Manage identity types" target="_blank">Manage identity types</a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Troubleshooting section-->
+   <!-- Need sec-->
+   <div id="support-openticket-needsection"
+      class="is-margin-right-big-big main-need-sec  resp-padding  border radius-5 has-background-white is-relative  hoverbox is-margin-bottom-big">
+      <img src="/assets/img/support/support-need-banner.svg" alt="Support when you need it" />
+      <div class="is-padded-bottom-big-big is-padded-top-big-big">
+         <div class="container">
+            <div class="columns">
+               <div class="is-6 column is-margin-left-big-big-big-big-big has-background-white">
+                  <h2 class="sup-head font-10 is-marginless is-uppercase">Success Plans</h2>
+                  <h3 class="has-text-weight-bold is-size-28 is-size-27-touch is-margin-bottom-big light-black is-marginless is-padded-top-big is-padded-bottom-big">Support when you need it.</h3>
+                  <!-- Todo fix dummy text -->
+                  <p class="is-padded-bottom-big m-0 is-marginless word-break">Your Ultimate Success Team helps you achieve value with strategic guidance and technical expertise. Receive support from a team of experts familiar with your business and focused on executing a roadmap aligned with your objectives and priorities for business impact.</p>
+                  <a id = "premium-learn-more" class="spectrum-Button spectrum-Button--primary spectrum-Button--sizeM  is-padded-left-big is-padded-right-big" href="https://experienceleague.adobe.com/docs/support-resources/data-sheets/overview.html" target="_blank">Learn more</a>
+              </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Need sec-->
+</div>

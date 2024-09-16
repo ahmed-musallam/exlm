@@ -1,0 +1,6 @@
+<li class="is-margin-bottom-big">
+  <label class="checkbox ${[data.level || []].map(u => u.includes(data.value) ? 'is-active' : '')}">
+    <input title="${data.label}" data-name="level" data-autosave="true" data-required="true" data-multi="true" data-replace="true" data-value="${data.value}" type="checkbox" value="${data.value}" ${[data.level || []].map(u => u.includes(data.value) ? ' checked' : '').join('')}>
+    <span class="is-margin-left-big">${data.label}</span>
+  </label>
+</li>

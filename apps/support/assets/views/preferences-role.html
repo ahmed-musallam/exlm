@@ -1,0 +1,7 @@
+<li class="is-margin-bottom-big">
+  <label class="checkbox ${[data.role || []].map(u => u.includes(data.value) ?'is-active' : '')}">
+    <input title="Business Leader" data-required="true" data-autosave="true" data-name="role" data-replace="true" data-multi="true" data-value="${data.value || ''}" type="checkbox" value="${data.value || ''}" ${[data.role || []].map(u => u.includes(data.value) ? ' checked' : '').join('')}>
+    <span class="is-margin-left-big">${data.label || ''}</span>
+  </label>
+  <p class="is-italic is-margin-left-big-big">${data.description || ''}</p>
+</li>

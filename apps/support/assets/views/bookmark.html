@@ -1,0 +1,13 @@
+<button class="${data.authenticated ? 'authed' : ''} spectrum-ActionButton u-tooltip-showOnHover"">
+    <span class="icon ${data.authenticated && data.bookmarked ? 'bookmarked' : 'bookmark-this'}"></span>
+    <div class="auth spectrum-Tooltip spectrum-Tooltip--top">
+        <span class="spectrum-Tooltip-label ${data.authenticated && data.bookmarked ? 'is-hidden' : ''}">Bookmark page</span>
+        <span class="spectrum-Tooltip-label ${data.authenticated && data.bookmarked ? '' : 'is-hidden'}">Remove bookmark</span>
+        <span class="spectrum-Tooltip-tip"></span>
+    </div>
+    <div class="no-auth spectrum-Tooltip spectrum-Tooltip--top">
+        <span class="spectrum-Tooltip-label">Sign-in to bookmark</span>
+        <span class="spectrum-Tooltip-tip"></span>
+    </div>
+</button>
+<span class="bookmark-label">Bookmark</span>

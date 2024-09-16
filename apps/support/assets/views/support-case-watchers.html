@@ -1,0 +1,41 @@
+<div id="case-watcher-modal" class="is-relative has-white-background is-padded-small has-background-white radius-5 is-open">
+   <a class="modal-cancel-btn">
+      <img src="/assets/img/support/whitepaper-cross.png" alt="Cross" class="cross-icon" />
+   </a>
+   <section class=" case-watcher is-margin-top-big spectrum-Dialog spectrum-Dialog--medium spectrum-Dialog--information has-text-left" role="alertdialog" tabindex="-1" aria-modal="true">
+      <section id="list-view" class="">
+         <div class="spectrum-Dialog-grid is-inline-block watchers-modal">
+            <h1 class="is-size-4 is-marginless light-grey has-text-weight-bold is-padded-bottom">Edit list of Watchers.</h1>
+            <section class="is-size-6	 is-marginless spectrum-Dialog-content dark-grey is-margin-top-big">The following users are looped in on this case.</section>
+            <div class="is-margin-top-big">
+               <div class="has-text-weight-bold is-size-7 light-grey is-text-blackest is-uppercase">Email</div>
+               <ul class="is-margin-top-big modal_list list-no-style border radius-5"></ul>
+            </div>
+            <div id="modal-action-control" class="is-padded-top-big-big spectrum-ButtonGroup spectrum-Dialog-buttonGroup spectrum-Dialog-buttonGroup--noFooter">
+               <button class="is-margin-right spectrum-Button spectrum-Button--sizeM modal-cancel-btn spectrum-Button--outline spectrum-Button--secondary spectrum-ButtonGroup-item" type="button">
+                  <span class="spectrum-Button-label">Cancel</span>
+               </button>
+               <button id="add-user" class="blue-btn spectrum-Button spectrum-Button--sizeM spectrum-Button--outline spectrum-Button--primary spectrum-ButtonGroup-item is-marginless" type="button" action-type="Add-User">Add additional users</button>
+            </div>
+         </div>
+      </section>
+      <section id="add-view" class="is-hidden">
+         <div class="spectrum-Dialog-grid is-inline-block">
+            <h1 class="is-size-4 is-marginless light-grey has-text-weight-bold light-grey has-text-weight-bold is-padded-bottom">Add to list of Watchers.</h1>
+            <section class="is-size-6 is-marginless spectrum-Dialog-content dark-grey is-margin-top-big">Separate additional user emails with a comma.</section>
+            <div class="is-margin-top-big">
+               <textarea class=" has-background-white radius-5 border" id="tag-input2" data-value=""></textarea>
+            </div>
+            <div id="modal-action-control" class="is-padded-top-big-big spectrum-ButtonGroup spectrum-Dialog-buttonGroup spectrum-Dialog-buttonGroup--noFooter">
+               <button class="is-margin-right spectrum-Button spectrum-Button--sizeM  modal-cancel-btn spectrum-Button--outline spectrum-Button--secondary spectrum-ButtonGroup-item" type="button">
+                  <span class="spectrum-Button-label">Cancel</span>
+               </button>
+               <button id="submit-users" class="blue-btn spectrum-Button spectrum-Button--sizeM spectrum-Button--outline spectrum-Button--primary spectrum-ButtonGroup-item is-marginless" type="button" action-type="Submit-User-List">
+                  <span>Add users</span>
+                  <span class="loader btn-loader is-margin-left-small is-hidden"></span>
+               </button>
+            </div>
+         </div>
+      </section>
+   </section>
+</div>

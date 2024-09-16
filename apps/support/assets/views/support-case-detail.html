@@ -1,0 +1,409 @@
+<div id="case-detail-commerce-error-sec" class="commerce_msg_sec w-100 is-hidden ">
+   <p class="m-0 has-text-white	is-size-6 is-padded-top is-padded-bottom">
+      <span></span>
+   </p>
+</div>
+<div class="content p-0 active" id="case-detail">
+   <div id="case-detail-page"
+      class="columns is-multiline is-marginless has-text-blackest is-padded-bottom-big-big is-padded-top-big light-grey-bg">
+      <div class="column is-full-mobile is-8-desktop ">
+         <div>
+            <div class="is-flex bread-crumbs is-padded-bottom-big is-vcentered mt-5">
+               <a id="link-mycase">My Cases</a>
+               <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 18 18" width="14">
+                  <defs>
+                     <style>
+                        .a {
+                           fill: #707070;
+                        }
+                     </style>
+                  </defs>
+                  <rect id="Canvas" fill="#ff13dc" opacity="0" width="0" height="0" />
+                  <path class="a" d="M12,9a.994.994,0,0,1-.2925.7045l-3.9915,3.99a1,1,0,1,1-1.4355-1.386l.0245-.0245L9.5905,9,6.3045,5.715A1,1,0,0,1,7.691,4.28l.0245.0245,3.9915,3.99A.994.994,0,0,1,12,9Z" />
+               </svg>
+               <span id="case-Id">Case #${data.caseId}</span>
+            </div>
+            <div id="case-head" class="is-flex is-justify-content-space-between resp-flex-wrap">
+               <h2 class="lh-35 light-black has-text-weight-bold is-size-28 is-size-27-touch is-marginless case-head-heading">${data.title}</h2>
+               <a class="spectrum-Button spectrum-Button--cta spectrum-Button--sizeM radius-5-imp is-hidden  py-1 px-2 ${'statusText' in data ? '' : 'is-hidden'}">
+                  <span class="spectrum-Button-label">${data.statusText || ''}</span>
+               </a>
+            </div>
+
+            <div id="case-description" class="is-block is-margin-top-big">
+               <p></p>
+               <a class="show-more-btn is-hidden">Show more</a>
+            </div>
+
+            <p class="is-padded-top-big-big  font-14 dark-grey"><span>Last updated:</span> <span id="updatedDate">${data.lastUpdated}</span></p>
+            <div class="support-form cases-form case-comment-form">
+               <textarea id="comment-area" class="is-padded-small w-100 radius-5  p-2 text-italic is-margin-bottom-small" placeholder="Comments"></textarea>
+               <div class="is-flex is-vcentered	 is-margin-bottom-big-big  is-padded-top-small	">
+                  <button id="comment-submit" class="spectrum-Button spectrum-Button--sizeM spectrum-Button--secondary px-3" disabled>
+                    <span class="spectrum-Button-label">Add comments</span>
+                  </button>
+               </div>
+            </div>
+            <ul id="support_case_comment" class="support_user_comment list-no-style"></ul>
+            <ul id="support_case_comment_loader" class="support_user_comment is-hidden list-no-style">
+               <li class="comment-loader-item">
+                  <div class=" border radius-5 has-background-white is-padded-small">
+                     <div class="is-flex is-vcentered is-justify-content-space-between is-margin-bottom-big resp-flex-wrap">
+                        <div class="is-flex is-vcentered">
+                           <span class="is-padded-left-small name font-14">
+                              <div class="coveo-result-frame coveo-placeholder-result">
+                                 <div class="coveo-result-row">
+                                    <div class="coveo-result-cell">
+                                       <div class="coveo-result-row">
+                                          <div class="coveo-result-cell">
+                                             <div class="coveo-placeholder-title"></div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </span>
+                        </div>
+                        <span class="font-14 date">
+                           <div class="coveo-result-frame coveo-placeholder-result">
+                              <div class="coveo-result-row">
+                                 <div class="coveo-result-cell">
+                                    <div class="coveo-result-row">
+                                       <div class="coveo-result-cell">
+                                          <div class="coveo-placeholder-title"></div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </span>
+                     </div>
+                     <div class="coveo-result-frame coveo-placeholder-result dic-line-one">
+                        <div class="coveo-result-row">
+                           <div class="coveo-result-cell">
+                              <div class="coveo-result-row">
+                                 <div class="coveo-result-cell">
+                                    <div class="coveo-placeholder-title"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="coveo-result-frame coveo-placeholder-result dic-line-two">
+                        <div class="coveo-result-row">
+                           <div class="coveo-result-cell">
+                              <div class="coveo-result-row">
+                                 <div class="coveo-result-cell">
+                                    <div class="coveo-placeholder-title"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </li>
+               <li class="comment-loader-item">
+                  <div class=" border radius-5 has-background-white is-padded-small">
+                     <div class="is-flex is-vcentered is-justify-content-space-between is-margin-bottom-big resp-flex-wrap">
+                        <div class="is-flex is-vcentered">
+                           <span class="is-padded-left-small name font-14">
+                              <div class="coveo-result-frame coveo-placeholder-result">
+                                 <div class="coveo-result-row">
+                                    <div class="coveo-result-cell">
+                                       <div class="coveo-result-row">
+                                          <div class="coveo-result-cell">
+                                             <div class="coveo-placeholder-title"></div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </span>
+                        </div>
+                        <span class="font-14 date">
+                           <div class="coveo-result-frame coveo-placeholder-result">
+                              <div class="coveo-result-row">
+                                 <div class="coveo-result-cell">
+                                    <div class="coveo-result-row">
+                                       <div class="coveo-result-cell">
+                                          <div class="coveo-placeholder-title"></div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </span>
+                     </div>
+                     <div class="coveo-result-frame coveo-placeholder-result dic-line-one">
+                        <div class="coveo-result-row">
+                           <div class="coveo-result-cell">
+                              <div class="coveo-result-row">
+                                 <div class="coveo-result-cell">
+                                    <div class="coveo-placeholder-title"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="coveo-result-frame coveo-placeholder-result dic-line-two">
+                        <div class="coveo-result-row">
+                           <div class="coveo-result-cell">
+                              <div class="coveo-result-row">
+                                 <div class="coveo-result-cell">
+                                    <div class="coveo-placeholder-title"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </li>
+               <li class="comment-loader-item">
+                  <div class=" border radius-5 has-background-white is-padded-small">
+                     <div class="is-flex is-vcentered is-justify-content-space-between is-margin-bottom-big resp-flex-wrap">
+                        <div class="is-flex is-vcentered">
+                           <span class="is-padded-left-small name font-14">
+                              <div class="coveo-result-frame coveo-placeholder-result">
+                                 <div class="coveo-result-row">
+                                    <div class="coveo-result-cell">
+                                       <div class="coveo-result-row">
+                                          <div class="coveo-result-cell">
+                                             <div class="coveo-placeholder-title"></div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </span>
+                        </div>
+                        <span class="font-14 date">
+                           <div class="coveo-result-frame coveo-placeholder-result">
+                              <div class="coveo-result-row">
+                                 <div class="coveo-result-cell">
+                                    <div class="coveo-result-row">
+                                       <div class="coveo-result-cell">
+                                          <div class="coveo-placeholder-title"></div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </span>
+                     </div>
+                     <div class="coveo-result-frame coveo-placeholder-result dic-line-one">
+                        <div class="coveo-result-row">
+                           <div class="coveo-result-cell">
+                              <div class="coveo-result-row">
+                                 <div class="coveo-result-cell">
+                                    <div class="coveo-placeholder-title"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="coveo-result-frame coveo-placeholder-result dic-line-two">
+                        <div class="coveo-result-row">
+                           <div class="coveo-result-cell">
+                              <div class="coveo-result-row">
+                                 <div class="coveo-result-cell">
+                                    <div class="coveo-placeholder-title"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </li>
+               <li class="comment-loader-item">
+                  <div class=" border radius-5 has-background-white is-padded-small">
+                     <div
+                        class="is-flex is-vcentered is-justify-content-space-between is-margin-bottom-big resp-flex-wrap">
+                        <div class="is-flex is-vcentered">
+                           <span class="is-padded-left-small name font-14">
+                              <div class="coveo-result-frame coveo-placeholder-result">
+                                 <div class="coveo-result-row">
+                                    <div class="coveo-result-cell">
+                                       <div class="coveo-result-row">
+                                          <div class="coveo-result-cell">
+                                             <div class="coveo-placeholder-title"></div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </span>
+                        </div>
+                        <span class="font-14 date">
+                           <div class="coveo-result-frame coveo-placeholder-result">
+                              <div class="coveo-result-row">
+                                 <div class="coveo-result-cell">
+                                    <div class="coveo-result-row">
+                                       <div class="coveo-result-cell">
+                                          <div class="coveo-placeholder-title"></div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </span>
+                     </div>
+                     <div class="coveo-result-frame coveo-placeholder-result dic-line-one">
+                        <div class="coveo-result-row">
+                           <div class="coveo-result-cell">
+                              <div class="coveo-result-row">
+                                 <div class="coveo-result-cell">
+                                    <div class="coveo-placeholder-title"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="coveo-result-frame coveo-placeholder-result dic-line-two">
+                        <div class="coveo-result-row">
+                           <div class="coveo-result-cell">
+                              <div class="coveo-result-row">
+                                 <div class="coveo-result-cell">
+                                    <div class="coveo-placeholder-title"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </li>
+            </ul>
+         </div>
+      </div>
+      <div class="column is-full-tablet is-4-desktop">
+         <div class="survey-notification is-flex m-0 mb-5 p-0 is-hidden" id="case-detail-survey">
+            <div class="survey-text">
+               <p class="survey-heading mb-0">We'd love your feedback!</p>
+               <p class="survey-para">How was your experience with this support case?</p>
+            </div>
+            <div id="case-detail-survey-btn" class="is-flex is-justify-content-center is-align-items-center">
+               <button class=" survey-btn mt-4 spectrum-Button spectrum-Button--cta spectrum-Button--sizeM mb-5">
+                  <span class="spectrum-Button-label is-padded-left-small is-padded-right-small is-flex">
+                     <span>Take the survey</span>
+                  </span>
+               </button>
+            </div>
+         </div>
+         <section id="case-detail-sec" class="support_case_sidebar has-background-white radius-5 border is-padded-top-big-big is-padded-bottom-big-big is-padded-left-big-big is-padded-right-big-big is-margin-bottom-big">
+            <h2 class="is-size-4	light-grey	has-text-weight-bold border-bottom is-padded-bottom-big is-margin-bottom-big mt-0">Case Detail</h2>
+            <ul class="list-no-style is-marginless sidebarlist">
+               <li id="contact-name" class="is-padded-bottom-big">
+                  <span class="is-size-7	has-text-weight-bold light-grey l-space is-uppercase">Contact Name</span>
+                  <p class="dark-grey font-14">${data.admin.firstName} ${data.admin.lastName}</p>
+               </li>
+               <li id="product" class="is-padded-bottom-big">
+                  <span class="is-size-7	has-text-weight-bold light-grey l-space is-uppercase">Product</span>
+                  <p class="dark-grey font-14">${data.productName}</p>
+               </li>
+               <li id="case-title" class="is-padded-bottom-big">
+                  <span class="is-size-7	has-text-weight-bold light-grey l-space is-uppercase">Case Title</span>
+                  <p class="dark-grey font-14">${data.title}</p>
+               </li>
+               <li id="case-number" class="is-padded-bottom-big">
+                  <span class="is-size-7	has-text-weight-bold light-grey l-space is-uppercase	">Case Number</span>
+                  <p class="dark-grey font-14">${data.caseId}</p>
+               </li>
+               <li id="case-watcher-section" class="is-padded-bottom-big is-hidden">
+                  <div class="wathers-outer support_banner_items">
+                     <span class="is-size-7	has-text-weight-bold light-grey is-block l-space is-uppercase"><span>Watchers</span>
+                        <a id="watcher-edit" class="watcher-edit is-hidden">
+                           <img src="/assets/img/support/edit-Icon.svg" alt="Edit watcher">
+                        </a>
+                     </span>
+                     <div id="case-watcher"></div>
+                  </div>
+               </li>
+               <li id="priority" class="is-padded-bottom-big">
+                  <span class="is-size-7	has-text-weight-bold light-grey l-space is-uppercase">Priority</span>
+                  <span class="u-tooltip-showOnHover my-case-priority-tooltip">
+                     <img src="/assets/img/support/Tooltip-hover.svg" alt="Priority" />
+                     <span class="spectrum-Tooltip spectrum-Tooltip--right spectrum-Tooltip is-inline-flex support-tooltip">
+                        <span class="spectrum-Tooltip-label">
+                           P4- Minor, Minimal or no interruptions to normal operations.
+                           <br>
+                           P3- Important, Interruptions to normal operations.
+                           <br>
+                           P2- Urgent, Serious interruptions to normal operations.
+                           <br>
+                           P1- Critical, Outage or extremely serious interruptions to operation
+                           <br>
+                        </span>
+                        <span class="spectrum-Tooltip-tip"></span>
+                     </span>
+                  </span>
+                  <p class="dark-grey font-14">${data.priorityText}</p>
+               </li>
+
+               <li id="impactCode" class="is-padded-bottom-big">
+                  <span class="is-size-7	has-text-weight-bold light-grey l-space is-uppercase">Business Impact</span>
+                  <span class="u-tooltip-showOnHover my-case-impact-tooltip">
+                     <img src="/assets/img/support/Tooltip-hover.svg" alt="Business Impact" />
+                     <span class="spectrum-Tooltip spectrum-Tooltip--right spectrum-Tooltip is-inline-flex support-tooltip">
+                        <span class="spectrum-Tooltip-label">
+                           Small: One or two users impacted.
+                           <br>
+                           Medium: A specific group
+                           <br>
+                           of users impacted.
+                           <br>
+                           Large: Majority of users impacted.
+                           <br>
+                        </span>
+                        <span class="spectrum-Tooltip-tip"></span>
+                     </span>
+                  </span>
+                  <p class="dark-grey font-14">${data.impactCodeText}</p>
+               </li>
+            </ul>
+            <div class="sidebar-form">
+               <button id="reopen-case-btn"  class="is-hidden spectrum-Button is-margin-right-small spectrum-Button--primary spectrum-Button--sizeM pl-3">
+                  <span class="spectrum-Button-label is-ma has-no-wrap has-text-weight-bold ">Reopen Case</span>
+               </button>
+               <span id="reopen-tooltip" class="is-hidden u-tooltip-showOnHover my-case-impact-tooltip ">
+                  <img src="/assets/img/support/Tooltip-hover.svg" alt="Business Impact">
+                  <span class=" spectrum-Tooltip spectrum-Tooltip--right spectrum-Tooltip is-inline-flex support-tooltip ">
+                     <span class="spectrum-Tooltip-label">
+                        This case was closed more than 14 days ago so it cannot be reopened.
+                     </span>
+                     <span class="spectrum-Tooltip-tip"></span>
+                  </span>
+               </span>
+               <div class="is-pulled-right pt-5	is-flex is-justify-content-left">
+                  
+                  <button id="escalate-case-btn" disabled class="spectrum-Button is-margin-right-small spectrum-Button--primary spectrum-Button--sizeM pl-3">
+                     <span class="spectrum-Button-label is-ma has-no-wrap has-text-weight-bold ">Escalate to management</span>
+                  </button>
+                  <button id="close-case-btn" disabled class="spectrum-Button spectrum-Button--primary spectrum-Button--sizeM pl-3">
+                     <span class="spectrum-Button-label has-no-wrap has-text-weight-bold">Close case</span>
+                  </button>
+               </div>
+               <div class="is-clearfix "></div>
+            </div>
+         </section>
+         <div class="is-padded-top-big  is-padded-left-big-big  is-padded-right-big-big" id="attachment-list">
+            <h3 class="is-size-5	light-grey has-text-weight-bold case-attachment-title" >Case Attachments</h3>
+            <div class="is-flex is-flex-wrap-wrap attachments-sec">
+               <ul id="attachments-list" class="is-relative is-marginless">
+                  <li class="case-attachment"  >
+                     <div class="is-relative custom-input-sec is-flex is-justify-content-center	is-vcentered radius-5">
+                        <input type="file" id="case-detail-attachment" class="hidden-file w-100 is-hidden">
+                        <span class="data-name w-100"></span>
+                        <img src="/assets/img/support/drag-add-icon.png" alt="Case Attachments">
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="error-sec" class="support_msg_sec w-100 is-hidden ">
+      <p class="m-0 has-text-white	is-size-6 has-text-centered is-padded-top is-padded-bottom">
+         <span></span>
+         <a title="Back to my case" class="has-text-white">My Cases</a>
+      </p>
+   </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="content p-0 active" id="request-a-session">
+   <div id="session-loader-div" class="is-hidden case-loader"></div>
+   <div class="banner_outer_sec is-padded-top-big-big is-relative resp-padding">
+      <div class="banner_sec_support open-ticket ">
+         <h2 class="set-index title is-size-2-tablet is-size-3-mobile  text-center is-margin-bottom-big-big has-text-weight-bold has-text-black">Hi ${data.username}, let's request a session</h2>
+         <div class="left_banner">
+            <img src="/assets/img/support/opencase-Left-banner.svg" />
+         </div>
+         <div class="right_banner">
+            <img src="/assets/img/support/open-case-Right-banner.svg" />
+         </div>
+         <div class="support_form_sec spectrum-Form w-100" id="session-form">
+            <div class="spectrum-Form-item is-margin-bottom-big">
+               <div class="is-flex">
+                  <label class="set-index is-inline-block has-text-weight-bold is-margin-bottom-small is-size-5-tablet spectrum-Form-itemLabel spectrum-FieldLabel is-flex">
+                     Select session type
+                  </label>
+                   <span class="u-tooltip-showOnHover session-type-tooltip pt-2 pl-2">
+                    <img src="/assets/img/support/Smock_Info_18_N.svg" alt="alert icon" />
+                     <span class="spectrum-Tooltip spectrum-Tooltip--right spectrum-Tooltip is-inline-flex support-tooltip">
+                        <span class="spectrum-Tooltip-label">
+                        The Mentor Sessions add-on provides skill-based learning in a just-in-time training method.
+                           <br>
+                        The Developer Boost add-on provides access to field engineering experts that can assist with break-fix work, troubleshooting of custom code, aligning to best practices, and answering questions related to development.
+                        </span>
+                        <span class="spectrum-Tooltip-tip"></span>
+                     </span>
+                   </span>
+
+
+               </div>
+               <div id="session-type-picker" class="w-100 is-fullwidth h-100  is-relative spectrumpicker-outer-box">
+                  <button class="support-form-productdata spectrum-Picker spectrum-Picker--sizeM adobe-exl-picker"
+                     aria-haspopup="listbox" selected-value="">
+                     <span class="spectrum-Picker-label is-placeholder adobe-exl-pickerSelectedOption has-text-grey is-italic" id="selected-ticket-product">Please select</span>
+                     <svg class="spectrum-Icon spectrum-UIIcon-ChevronDown100 spectrum-Picker-menuIcon" focusable="false" aria-hidden="true">
+                        <use xlink:href="#spectrum-css-icon-Chevron100" />
+                     </svg>
+                  </button>
+                  <div class="spectrum-Popover spectrum-Popover--bottom spectrum-Picker-popover adobe-exl-pickerOptions">
+                     <ul class="spectrum-Menu m-0 supportSidebarOrgPickerListWrap" id="support-session-type" role="listbox">
+           
+                        <li data-id="dx_mentor_session_support" data-label="Mentor Session" class="spectrum-Menu-item session-type-li" role="option" aria-selected="true" tabindex="0">
+                           <h5>Mentor Session</h5>
+                        </li>
+                        
+                        <li data-id="dx_developer_boost_support" data-label="Developer Boost" class="spectrum-Menu-item session-type-li" role="option" aria-selected="true" tabindex="0">
+                           <h5>Developer Boost</h5>
+                        </li>
+           
+                     </ul>
+                  </div>
+               </div>
+               <div id="product-picker-loader" class="is-relative spectrumpicker-outer-box is-margin-bottom-big transparent-box is-hidden support-sidebar-orgpicker-wrap">
+                  <div class="coveo-result-frame coveo-placeholder-result">
+                     <div class="coveo-result-row">
+                        <div class="coveo-result-cell">
+                           <div class="coveo-result-row">
+                              <div class="coveo-result-cell">
+                                 <div class="coveo-placeholder-title"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="icon-id is-margin-bottom-big-big is-hidden is-flex" id="iconId">
+               <div class="status-icon pt-1">
+                  <img src="/assets/img/support/Smock_Alert_18_N.svg" alt="alert icon" class="is-margin-right-small" />
+                </div>
+                <div class="session-remaining">
+                   <p> <span id="sessionsRemainingCount"></span> sessions remaining</p>
+
+
+                </div>
+             </div>
+            <div id="session-products" class="dynamic-fields">
+            </div>
+            <div id="session-topics" class="dynamic-fields developer-fields">
+            </div>
+            <div id="product-specific-dropdown" class="dynamic-fields  developer-fields">
+            </div>
+
+            <div id="product-specific-input" class="dynamic-fields  developer-fields" >
+            </div>
+
+            <div id="additional-input" class="dynamic-fields  developer-fields" >
+            </div>
+
+            <div id="session-fields" class="dynamic-fields developer-fields">
+            </div>
+            
+         </div>
+         <div class="is-pulled-right is-margin-top-big-big is-flex is-vcentered is-hidden" id="submitButton">
+            <button class="case-btn spectrum-Button spectrum-Button--cta spectrum-Button--sizeM" id="support-session-submitBtn">
+               <span class="spectrum-Button-label is-padded-left-small is-padded-right-small is-flex">
+                  <span>Submit Request</span>
+                     <span class="loader btn-loader is-hidden"></span>
+                  </span>
+            </button>
+         </div>
+      </div>
+      
+   </div>
+   <div id="support-openticket-casecreate-message" class="is-hidden"></div>
+   <div id="support-openticket-casecreate-errormessage" class="is-hidden"></div>
+   <div class="is-clearfix"></div>
+</div>

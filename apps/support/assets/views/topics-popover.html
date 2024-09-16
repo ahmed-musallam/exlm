@@ -1,0 +1,41 @@
+<div class="topics-popover is-hidden">
+  <div class="topics-header-block">
+    <div class="topics-popover-left">
+      <div class="topics-header-title">Topic</div>
+      <h1 class="topic-header-label"></h1>
+    </div>
+    
+    <div class="topics-header-right">
+      <button type="button" class="topics-popover-close unstyled-btn" aria-label="close">
+        <img src="//cdn.experienceleague.adobe.com/img/close.svg" alt="Close">
+      </button>
+      <span class="showing-label">Showing results</span>
+      <a class="topics-view-more" href="">View more results in search</a>
+    </div>
+  </div>
+  <div class="topic-results-container">
+    <div class="topic-results-topbar">
+      <div class="topic-results-tabs is-hidden-touch">
+        <button type="button" class="topic-results-tab is-active unstyled-btn" data-query="">Most relevant</button>
+        <button type="button" class="topic-results-tab unstyled-btn" data-query="@el_contenttype=Documentation">Documentation</button>
+        <button type="button" class="topic-results-tab unstyled-btn" data-query="@el_contenttype=Tutorial">Tutorials</button>
+        <button type="button" class="topic-results-tab unstyled-btn" data-query="@el_contenttype=Community">Community</button>
+        <button type="button" class="topic-results-tab unstyled-btn" data-query="@el_contenttype=Event">Events</button>
+      </div>
+      <div class="topic-results-dropdown is-hidden-desktop">
+        <button class="topic-results-tab is-active unstyled-btn" data-query="">Most relevant</button>
+        <button class="topic-results-tab unstyled-btn" data-query="@el_contenttype=[Documentation]">Documentation</button>
+        <button class="topic-results-tab unstyled-btn" data-query="@el_contenttype=[Tutorial]">Tutorials</button>
+        <button class="topic-results-tab unstyled-btn" data-query="@el_contenttype=[Community]">Community</button>
+        <button class="topic-results-tab unstyled-btn" data-query="@el_contenttype=[Event]">Events</button>
+      </div>
+    </div>
+
+    <div class="topic-results is-hidden">
+      
+    </div>
+    <div class="spinner">
+      <div class="spectrum-ProgressCircle spectrum-ProgressCircle--indeterminate"></div>
+    </div>
+  </div>
+</div>

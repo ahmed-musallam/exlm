@@ -1,0 +1,68 @@
+<div id="recommended" class="is-hidden">
+  <div class="columns is-marginless">
+    <div class="column is-offset-1 is-6">
+      <section class="hero">
+        <div class="hero-body is-padded-left-none">
+          <div class="container">
+            <h1 class="title is-1">Explore topics</h1>
+            <h2 class="is-6 has-text-weight-normal">Explore our vast library of content to find quick answers across Adobe's best learning guides, product documentation, and help resources</h2>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div data-id="promo-container" class="is-hidden"></div>
+  <div id="solutions">
+    <div class="columns is-marginless is-variable is-4-mobile is-8-tablet">
+      <div class="column is-3">
+        <p class="has-text-weight-bold is-margin-bottom-small is-size-5">Select your product area of interest</p>
+        <div data-id="solutions" class="card">
+          <div class="card-content">
+            <p class="has-text-weight-bold">Products</p>
+            <hr>
+            <div data-id="solutions-menu"></div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-8 is-padded-top-big-big-big-big">
+        <div class="is-margin-bottom-big-big">
+          <h2 class="title is-5" data-id="about-solution">Adobe Experience Cloud content library</h2>
+          <h3 class="subtitle is-6" data-id="about-solution">Learn how to use Adobe Experience Cloud with videos, event recordings, and guides.</h3>
+          <div class="field">
+            <p class="control has-icons-left">
+              <input id="rsearch" data-key="search" type="search" class="input search is-margin-top-big" placeholder="Search"/>
+              <span class="icon is-small is-left is-margin-top-big">
+                <img src="/assets/img/search_grey.svg" loading="lazy" alt="Search">
+              </span>
+            </p>
+          </div>
+          <div id="tags" class="is-margin-top-big is-margin-bottom-big buttons" data-key="search"></div>
+          <dx-cards id="search-comp" key="search"
+                      headline="Title" content="Description" footer="Tags,Role" uri="URL"
+                      left="Back" right="Next" empty="No results to display"
+                      toggleleft="Recommended" toggleright="Newest" togglekey="sort" toggleleftvalue="Order asc"
+                      togglerightvalue="timestamp desc, Order asc" toggleactive="left"
+                      toggleenabled="true"
+                      bulma="/assets/css/bulma.min.css"
+                      cdn="//cdn.experienceleague.adobe.com"
+                      page="{{a}} of {{b}}"
+                      url=""
+                      duration="Seconds"
+                      alt="The Image for"
+                      upvote="Vote up"
+                      downvote="Vote down"
+                      bookmark="Bookmark this"
+                      copy="Copy launch URL"
+                      locale="en">
+          </dx-cards>
+        </div>
+        <div data-id="events" class="has-underline"></div>
+        <div data-id="events" class="is-margin-top-big-big is-margin-bottom-big-big">
+          <h2 class="title is-4">Events</h2>
+          <p>Events have moved to our new events page where you can find all upcoming and on-demand learning events.</p>
+          <p><a href="/events/?lang=en">Visit events now.</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

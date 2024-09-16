@@ -1,0 +1,31 @@
+<div data-id="maintenance-banner" class="maintenance-banner active">
+  <div class="columns is-mobile is-marginless">
+    <div class="info column is-narrow">
+      <figure class="image is-16x16">
+        <img src="/assets/img/spectrum-info-icon.svg" alt="Info">
+      </figure>
+    </div>
+    <div class="column">
+      <div class="columns is-flex is-vcentered has-space-between" style="flex-wrap:wrap">
+        <div class="column is-vcentered is-pulled-left is-padded-left-0" style="flex:1 1 auto">
+          <div class="has-text-white" style="line-height:1rem">
+            <div class="maintenance-header">
+              ${data.header}
+            </div>
+            <div data-id="maintenance-message" class="maintenance-message">
+              ${data.body}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column is-narrow is-paddingless" style="border-right:1px solid rgba(255,255,255,0.2);margin-top:.5rem !important;margin-bottom:.5rem !important"></div>
+    <div class="column is-narrow">
+      <a class="spectrum-notice-close">
+        <figure class="image is-14x14">
+          <img src="/assets/img/close_white.svg" alt="Close">
+        </figure>
+      </a>
+    </div>
+  </div>
+</div>

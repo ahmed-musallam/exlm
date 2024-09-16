@@ -1,0 +1,124 @@
+<div id="support" class="is-hidden">
+  <div class="progress-bar is-hidden" style="width: 25%"></div>
+  <div class="support_msg_sec w-100 is-hidden">
+    <p class="m-0 has-text-white	is-size-6 has-text-centered is-padded-top is-padded-bottom">
+      <span>You are not a support entitled user within organization. Contact your System Admin for additional support.</span>
+      <a href="https://experienceleague.adobe.com//docs/customer-one/using/home" target="_blank"
+       title="Learn more" class="has-text-white support-learn-more" >Learn more.</a>
+	   <span>If you are a Commerce customer, please  </span>
+	   <a href="https://experienceleague.adobe.com/en/docs/commerce-knowledge-base/kb/help-center-guide/magento-help-center-user-guide#troubleshooting-shared-access" target="_blank"
+       title="Learn more" class="has-text-white support-learn-more" >click here.</a>
+    </p>
+  </div>
+  <div class="columns is-marginless">
+    <div class="support_tab_wrapper w-100 relative is-flex light-grey-bg">
+      <div class="buttonWrapper left_support_tabs_sec ">
+        <div class="is-relative spectrumpicker-outer-box is-margin-bottom-big is-hidden support-sidebar-orgpicker-wrap" id="support-sidebar-orgpicker-1">
+          <button class="w-100 spectrum-Picker spectrum-Picker--sizeM adobe-exl-picker" aria-haspopup="listbox">
+            <img src="/assets/img/support/selectboxicon.svg" class="is-margin-right-small " />
+            <span class="spectrum-Picker-label adobe-exl-pickerSelectedOption"></span>
+            <svg class="spectrum-Icon spectrum-UIIcon-ChevronDown100 spectrum-Picker-menuIcon" focusable="false" aria-hidden="true">
+              <use xlink:href="#spectrum-css-icon-Chevron100"></use>
+           </svg>
+          </button>
+          <div class="w-100 spectrum-Popover spectrum-Popover--bottom spectrum-Picker-popover adobe-exl-pickerOptions">
+            <ul class="spectrum-Menu is-margin-small supportSidebarOrgPickerListWrap" role="listbox">
+            </ul>
+          </div>
+        </div>
+        <div id="support-picker-loader" class="is-relative spectrumpicker-outer-box is-margin-bottom-big transparent-box is-hidden support-sidebar-orgpicker-wrap">
+        <div  class="coveo-result-frame coveo-placeholder-result">
+          <div class="coveo-result-row">
+            <div class="coveo-result-cell">
+              <div class="coveo-result-row">
+                <div class="coveo-result-cell">
+                  <div class="coveo-placeholder-title"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <span class="ml-12 has-text-black has-text-weight-bold is-uppercase  is-inline-block is-size-7 is-margin-bottom-small">Support</span>
+        <div class="container support-enabled">
+            <nav>
+              <ul class="spectrum-SideNav">
+                <li class="spectrum-SideNav-item">
+                  <a class="spectrum-SideNav-itemLink support_tab_button" aria-current="page" data-id="home" id="support-home-id">
+                    <img src="/assets/img/support/Hometab.svg" alt="Home" class="is-margin-right-small" />
+                    <span>Home</span>
+                  </a>
+                </li>
+                </li>
+                <li class="spectrum-SideNav-item">
+                  <a class="spectrum-SideNav-itemLink support_tab_button" data-id="open-ticket">
+                    <span class="is-hidden tabs-tooltip has-text-white	is-size-7	is-marginless">Opening a case requires entitlement.</span>
+                    <img src="/assets/img/support/opencase.svg" alt="Open Case" class="is-margin-right-small" />
+                    <span>Open Ticket</span>
+                  </a>
+                </li>
+                <li class="spectrum-SideNav-item">
+                  <a class="spectrum-SideNav-itemLink support_tab_button" data-id="my-cases">
+                    <span class="is-hidden tabs-tooltip has-text-white	is-size-7	is-marginless">My cases requires entitlement.</span>
+                    <img src="/assets/img/support/my-cases.svg" alt="Mycases" class="is-margin-right-small	mycase" />
+                    <span>My Cases<span>
+                  </a>
+                </li>
+                <li class="spectrum-SideNav-item is-hidden">
+                  <a class="spectrum-SideNav-itemLink support_tab_button" data-id="request-a-session">
+                    <span class="is-hidden tabs-tooltip has-text-white	is-size-7	is-marginless">Request a session requires entitlement.</span>
+                    <img src="/assets/img/support/Smock_Calendar_18_N.svg" alt="Request a session" class="is-margin-right-small" />
+                    <span>Request a session</span>
+                  </a>
+                </li>
+                <li class="spectrum-SideNav-item is-hidden">
+                  <a class="spectrum-SideNav-itemLink support_tab_button" data-id="ultimate-success-inner-circle" id="ultimate-inner-circle-anchor-views">
+                    <span class="is-hidden tabs-tooltip has-text-white	is-size-7	is-marginless">Ultimate Success - Inner Circle requires entitlement.</span>
+                    <img src="/assets/img/support/Ultimate_Success_Icon.png" alt="Ultimate Success - Inner Circle" class="is-margin-right-small image-ultimate" />
+                    <span>Ultimate Success - Inner Circle</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+        </div>
+        <hr class="is-hidden" id="horizontal-line">
+        <div class="is-hidden" id="status-bar">
+          <span class="ml-12  is-inline-block " id="systemStatus"></span>
+          <div id="status-picker-loader" class="is-relative spectrumpicker-outer-box is-margin-bottom-big transparent-box support-sidebar-orgpicker-wrap is-hidden">
+            <div class="coveo-result-frame coveo-placeholder-result">
+               <div class="coveo-result-row">
+                  <div class="coveo-result-cell">
+                     <div class="coveo-result-row">
+                        <div class="coveo-result-cell">
+                           <div class="coveo-placeholder-title"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+          <div class="container support-enabled">
+            <nav>
+              <ul class="system-status" id="ticketStatusUL">
+              </ul>
+            </nav>
+          </div>  
+        </div>  
+      
+      <div class="survey-notification is-flex is-flex-direction-column mt-6 is-hidden" id="sidebar-survey">
+        <img src="/assets/img/support/CardVert.png" alt="Card Vert">
+        <p class="survey-heading mx-3">We'd love your feedback!</p>
+        <p class="mt-2 survey-para mx-3">Tell us a little bit about your recent support tickets.</p>
+        <button class="survey-btn px-3 spectrum-Button spectrum-Button--primary spectrum-Button--sizeM is-padded-left-big is-padded-right-big mt-4 mb-5 mx-3 container" id="sidebar-available-survey-btn">
+          <span class="spectrum-Button-label is-padded-left-small is-padded-right-small is-flex">
+            View available surveys
+          </span>
+       </button>
+      </div>
+    </div>
+      <div class="right_support_tabs_sec">
+        <div class="contentWrapper" data-id="content-wrapper"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="columns is-marginless">
+  <div class="column is-11 is-marginless-mobile is-margin-left-big-big-big is-margin-bottom-big-big-big-big is-margin-top-big-big">
+    <div class="is-margin-bottom-big-big">
+      <h3 class="title is-4 is-margin-bottom-big">My Bookmarks</h3>
+      <h4 class="is-size-5 has-text-weight-bold">Take me to:</h4>
+      <ul class="no-list-style" data-toc="bookmarks">
+        <li><a class="has-text-weight-bold" data-link="#bookmarks-courses">Courses</a></li>
+        <li><a class="has-text-weight-bold" data-link="#bookmarks-content">Content</a></li>
+      </ul>
+    </div>
+    <div class="is-margin-bottom-big-big">
+      <h3 class="title is-4 is-marginless" id="bookmarks-courses">Courses</h3>
+      <div class="has-underline"></div>
+      <dx-cards id="bookmarks-skills-comp" headline="Path Title" content="Path Description" footer="Type,Role" uri="URL"
+                cdn="//cdn.experienceleague.adobe.com"
+                left="Previous" right="Next" empty="No saved courses"
+                bulma="/assets/css/bulma.min.css" key="use-cases"
+                page="{{a}} of {{b}}"
+                url=""
+                alt="The Image for"
+                upvote="Vote up"
+                downvote="Vote down"
+                bookmark="Bookmark this"
+                copy="Copy launch URL"
+                locale="en">
+      </dx-cards>
+    </div>
+    <div class="is-margin-bottom-big-big">
+      <h3 class="title is-4 is-marginless" id="bookmarks-content">Content</h3>
+      <div class="has-underline"></div>
+      <dx-cards id="bookmarks-guides-comp" headline="Title" content="Description" footer="Type,Role" uri="URL"
+                cdn="//cdn.experienceleague.adobe.com"
+                left="Previous" right="Next" empty="No saved guides"
+                bulma="/assets/css/bulma.min.css" key="use-cases"
+                page="{{a}} of {{b}}"
+                url=""
+                alt="The Image for"
+                upvote="Vote up"
+                downvote="Vote down"
+                bookmark="Bookmark this"
+                copy="Copy launch URL"
+                locale="en">
+      </dx-cards>
+    </div>
+  </div>
+</div>

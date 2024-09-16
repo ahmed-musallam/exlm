@@ -1,0 +1,63 @@
+<div id="case-action-modal" class="spectrum-Modal  has-white-background is-padded-big has-background-white is-open	radius-5" data-testid="modal">
+  <section class="is-margin-top-big spectrum-Dialog spectrum-Dialog--medium spectrum-Dialog--information" role="alertdialog" tabindex="-1" aria-modal="true">
+    <div id="case-modal-body" class="spectrum-Dialog-grid is-inline-block">
+      <h1 id="modal-title" class="is-size-5	light-grey has-text-weight-bold is-size-5	light-grey has-text-weight-bold is-padded-bottom">Are you sure you want to ${data.modalType} this case?</h1>
+      <hr class="spectrum-Divider spectrum-Divider--sizeM spectrum-Divider--horizontal spectrum-Dialog-divider is-margin-bottom-small">
+      <section class="spectrum-Dialog-content dark-grey is-margin-top-big">This action cannot be undone.</section>
+      <div class="is-margin-top-big">
+        <div class="is-margin-bottom-big is-hidden" id="action-picker-sec">
+          <label class="is-margin-bottom-big">Why do you want to ${data.modalType} this case?</label>
+          <div class="is-relative spectrumpicker-outer-box">
+            <div id="support-case-close-picker" class="w-100 is-fullwidth h-100  is-relative spectrumpicker-outer-box is-hidden">
+              <button class="has-background-white radius-0 w-100 support-form-productdata spectrum-Picker spectrum-Picker--sizeM adobe-exl-picker" aria-haspopup="listbox" selected-value="">
+                <span class="spectrum-Picker-label is-placeholder adobe-exl-pickerSelectedOption">Why are you closing this case?</span>
+                <svg class="spectrum-Icon spectrum-Picker-menuIcon spectrum-UIIcon-ChevronDown100" focusable="false" aria-hidden="true">
+                  <use xlink:href="#spectrum-css-icon-Chevron100"></use>
+                </svg>
+              </button>
+              <div style="z-index: 9;" class="spectrum-Popover spectrum-Popover--bottom spectrum-Picker-popover adobe-exl-pickerOptions">
+                <ul class="spectrum-Menu m-0 supportSidebarOrgPickerListWrap" id="option-list" role="listbox"></ul>
+              </div>
+            </div>
+            <div id="support-case-escalate-picker" class="w-100 is-fullwidth h-100  is-relative spectrumpicker-outer-box is-hidden">
+              <button class="has-background-white radius-0 w-100 support-form-productdata spectrum-Picker spectrum-Picker--sizeM adobe-exl-picker" aria-haspopup="listbox" selected-value="">
+                <span class="spectrum-Picker-label is-placeholder adobe-exl-pickerSelectedOption">Why are you escalating this case?</span>
+                <svg class="spectrum-Icon spectrum-Picker-menuIcon spectrum-UIIcon-ChevronDown100" focusable="false" aria-hidden="true">
+                  <use xlink:href="#spectrum-css-icon-Chevron100"></use>
+                </svg>
+              </button>
+              <div style="z-index: 9;" class="spectrum-Popover spectrum-Popover--bottom spectrum-Picker-popover adobe-exl-pickerOptions">
+                <ul class="spectrum-Menu m-0 supportSidebarOrgPickerListWrap" id="option-list" role="listbox"></ul>
+              </div>
+            </div>
+            <div id="support-case-reopen-picker" class="w-100 is-fullwidth h-100  is-relative spectrumpicker-outer-box is-hidden">
+              <button class="has-background-white radius-0 w-100 support-form-productdata spectrum-Picker spectrum-Picker--sizeM adobe-exl-picker" aria-haspopup="listbox" selected-value="">
+                <span class="spectrum-Picker-label is-placeholder adobe-exl-pickerSelectedOption">Select an option...</span>
+                <svg class="spectrum-Icon spectrum-Picker-menuIcon spectrum-UIIcon-ChevronDown100" focusable="false" aria-hidden="true">
+                  <use xlink:href="#spectrum-css-icon-Chevron100"></use>
+                </svg>
+              </button>
+              <div style="z-index: 9;" class="spectrum-Popover spectrum-Popover--bottom spectrum-Picker-popover adobe-exl-pickerOptions">
+                <ul class="spectrum-Menu m-0 supportSidebarOrgPickerListWrap" id="option-list" role="listbox"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="case-reason-sec" class="is-hidden">
+          <label class="is-margin-bottom-big">We can assist you better with detailed information.</label>
+          <textarea id="case-reason-summary" rows="3" placeholder="Please tell more about your reason to escalate" class="w-100 border radius-5"></textarea>
+        </div>
+      </div>
+      <div id="modal-action-control" class="is-justify-content-end  pr-6 mr-5 is-padded-top-big-big is-padded-left-0 spectrum-ButtonGroup spectrum-Dialog-buttonGroup spectrum-Dialog-buttonGroup--noFooter">
+        <button id="modal-cancel" aria-label="close" class="is-margin-right spectrum-Button spectrum-Button--sizeM spectrum-Button--outline spectrum-Button--secondary spectrum-ButtonGroup-item" type="button">
+          <span class="spectrum-Button-label">Cancel</span>
+        </button>
+        <button id="modal-action" class="blue-btn spectrum-Button spectrum-Button--sizeM spectrum-Button--outline spectrum-Button--primary" type="button">
+          <span class="is-flex is-vcentered spectrum-Button-label"><span>${data.actionBtn}</span>
+            <span class="loader btn-loader is-margin-left-small is-hidden"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

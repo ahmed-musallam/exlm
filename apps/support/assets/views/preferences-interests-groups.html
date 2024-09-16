@@ -1,0 +1,8 @@
+<div class="column is-one-third">
+  <div class="content">
+    <h3 class="title is-5 is-margin-bottom-big ${data.name === '' ? 'is-hidden' : ''}">${data.name}</h3>
+    <ul class="list-no-style">
+      ${data.items.map(i => `<li class="is-margin-bottom-big ${i[1].Nested ? 'is-margin-left-big-big' : ''}"><label class="checkbox"><input data-autosave="true" data-name="interests" data-multi="true" data-replace="true" data-group="${i[1].Nested !== true ? i[1].SubGroup || '' : ''}" data-subgroup="${i[1].Nested ? i[1].SubGroup || '' : ''}" type="checkbox" value="${i[0].Name}" ${[data.interests || []].map(u => u.includes(i[0].Name) ?' checked' : '').join('')}><span class="is-margin-left-big">${i[1].Label || i[1].Name}</span></label>${data.entitlements.some(x => x.includes(i[0].Name)) ? '<span class="u-tooltip-showOnHover"><span class="has-text-weight-bold is-size-4 is-padded-left-small is-entitlement">* </span><div class="spectrum-Tooltip spectrum-Tooltip--top spectrum-Tooltip--info"><span class="spectrum-Tooltip-label"><img class="asterisk is-margin-right-small" src="/assets/img/asterisk-white.svg">Indicates your provisioned cloud products.</span><span class="spectrum-Tooltip-tip"></span></div></span>' : ''}</li>`).join('')}
+    </ul>
+  </div>
+</div>

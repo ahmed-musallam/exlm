@@ -1,0 +1,45 @@
+<div class="card-content">
+  <p class="is-white has-text-weight-bold is-margin-bottom-big">General resources</p>
+  <div class="row">
+    <figure class="image is-32x32">
+      <img src="/assets/img/status.svg" loading="lazy">
+    </figure>
+    <div>
+      <p class="has-text-weight-bold">Check the Adobe System Status</p>
+      <a target="_blank" href="${data.Status}">${data.ID} System Status</a>
+    </div>
+  </div>
+  <div class="row ${'Community' in data === false ? 'is-hidden' : ''}">
+    <figure class="image is-32x32">
+      <img src="/assets/img/message.svg" loading="lazy">
+    </figure>
+    <div>
+      <p class="has-text-weight-bold">Community Forum</p>
+      <a target="_blank" href="${data.Community || ''}">${data['Community Label'] || data.ID} community forum</a>
+    </div>
+  </div>
+  <div class="row row-phone ${'Phone' in data === false ? 'is-hidden' : ''}">
+    <figure class="image is-32x32">
+      <img src="/assets/img/help.svg" loading="lazy">
+    </figure>
+    <div>
+      <p class="has-text-weight-bold">Phone number</p>
+      <p>${data.Phone}</p>
+    </div>
+  </div>
+  <div class="row ${'Upgrade URL' in data === false ? 'is-hidden' : ''}">
+    <figure class="image is-32x32">
+      <img src="/assets/img/link.svg" loading="lazy">
+    </figure>
+    <div>
+      <p>Not on the latest version of ${data.ID}?</p>
+      <a target="_blank" href="${data['Upgrade URL']}">Request an Upgrade</a>
+    </div>
+  </div>
+  <div class="${'Auth URL' in data === false ? 'is-hidden' : ''}">
+    <p class="has-text-centered sign-in-prompt">${data['Auth Message'] || ''}</p>
+    <div class="has-text-centered is-margin-top-big">
+      <a href="${data['Auth URL'] || ''}" class="button is-rounded is-info has-text-centered">${data['Auth Label'] || ''}</a>
+    </div>
+  </div>
+</div>
