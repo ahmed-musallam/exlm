@@ -11,8 +11,17 @@ export default async function decorate(block) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
   const { body, head } = doc;
+  // clear block:
   block.innerHTML = '';
-  block.append(...body.childNodes);
+
+  const appDiv = document.createElement('div');
+  // copy all attributes on body to block
+  // eslint-disable-next-line no-restricted-syntax
+  for (const { name, value } of body.attributes) {
+    appDiv.setAttribute(name, value);
+  }
+  appDiv.append(...body.childNodes);
+  block.append(appDiv);
   // append everything in the head to the document head
   document.head.append(...head.childNodes);
 }
