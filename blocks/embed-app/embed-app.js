@@ -1,3 +1,14 @@
+function executeScript(oldScript) {
+  const newScript = document.createElement('script');
+  if (oldScript.src) {
+    newScript.src = oldScript.src;
+    newScript.type = oldScript.type || 'text/javascript';
+  } else {
+    newScript.textContent = oldScript.textContent;
+  }
+  document.head.appendChild(newScript);
+}
+
 /**
  *
  * @param {HTMLElement} block
@@ -23,5 +34,11 @@ export default async function decorate(block) {
   appDiv.append(...body.childNodes);
   block.append(appDiv);
   // append everything in the head to the document head
-  document.head.append(...head.childNodes);
+  [...head.children].forEach((child) => {
+    if (child.tagName === 'SCRIPT') {
+      executeScript(child);
+    } else {
+      document.head.appendChild(child);
+    }
+  });
 }
