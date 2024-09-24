@@ -31,7 +31,7 @@ export default async function decorate(block) {
   for (const { name, value } of body.attributes) {
     appDiv.setAttribute(name, value);
   }
-  appDiv.innerHTML = body.querySelector('main').innerHTML;
+  appDiv.setHTMLUnsafe(body.querySelector('main').innerHTML);
   block.append(appDiv);
   // append everything in the head to the document head
   [...head.children].forEach((child) => {
