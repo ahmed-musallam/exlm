@@ -1,7 +1,0 @@
-<div class="column has-text-left">
-  <div class="content">
-    <ul class="list-no-style">
-      ${data.items.map(i => `<li class="is-margin-bottom-small"><label class="checkbox"><input data-autosave="true" data-name="industryInterests" data-multi="false" data-replace="true" type="radio" value="${i[0]}" ${[data.industryInterests || []].map(u => u.includes(i[0]) ?' checked' : '').join('')}><span class="is-margin-left-big">${i[1]}</span></label></li>`).join('')}
-    </ul>
-  </div>
-</div>
