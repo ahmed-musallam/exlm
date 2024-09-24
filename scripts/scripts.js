@@ -774,6 +774,12 @@ export function getConfig() {
     ['zh-hant', 'zh-Hant'],
     ['zh-hans', 'zh-Hans'],
   ]);
+  const cookieConsentName = 'OptanonConsent';
+  const targetCriteriaIds = {
+    mostPopular: 'exl-hp-auth-recs-2',
+    recommended: 'exl-hp-auth-recs-1',
+    recentlyViewed: 'exl-hp-auth-recs-3',
+  };
 
   const currentHost = window.location.hostname;
   const defaultEnv = HOSTS.find((hostObj) => hostObj.env === 'DEV');
@@ -813,6 +819,8 @@ export function getConfig() {
     ppsOrigin,
     launchScriptSrc,
     signUpFlowConfigDate,
+    cookieConsentName,
+    targetCriteriaIds,
     khorosProfileUrl: `${cdnOrigin}/api/action/khoros/profile-menu-list`,
     khorosProfileDetailsUrl: `${cdnOrigin}/api/action/khoros/profile-details`,
     privacyScript: `${cdnOrigin}/etc.clientlibs/globalnav/clientlibs/base/privacy-standalone.js`,
@@ -832,7 +840,7 @@ export function getConfig() {
     solutionsUrl: `${cdnOrigin}/api/solutions?page_size=100`,
     pathsUrl: `${cdnOrigin}/api/paths`,
     // Personlized Home Page Link
-    personalizedHomeLink: `/${lang}/home`,
+    personalizedHomeLink: `/home`,
     // Browse Left nav
     browseMoreProductsLink: `/${lang}/browse`,
     // Machine Translation
@@ -848,6 +856,8 @@ export function getConfig() {
       ? `https://experienceleaguecommunities.adobe.com/?profile.language=${communityLocale}`
       : `https://experienceleaguecommunities-dev.adobe.com/?profile.language=${communityLocale}`,
     interestsUrl: `https://experienceleague.adobe.com/api/interests?page_size=200&sort=Order&lang=${lang}`,
+    // Param for localized Community Profile URL
+    localizedCommunityProfileParam: `?profile.language=${communityLocale}`,
   };
   return window.exlm.config;
 }
@@ -1382,6 +1392,21 @@ export async function fetchJson(url, fallbackUrl) {
     .then((json) => json?.data || []);
 }
 
+export function getCookie(cookieName) {
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const cookies = decodedCookie.split(';');
+  for (let i = 0; i < cookies.length; i += 1) {
+    let cookie = cookies[i];
+    while (cookie.charAt(0) === ' ') {
+      cookie = cookie.substring(1);
+    }
+    if (cookie.indexOf(cookieName) === 0) {
+      return cookie.substring(cookieName.length + 1);
+    }
+  }
+  return null;
+}
+
 async function loadPage() {
   // THIS IS TEMPORARY FOR SUMMIT.
   if (handleHomePageHashes()) return;
@@ -1425,33 +1450,35 @@ if (window.hlx.aemRoot || window.location.href.includes('.html')) {
 }
 
 // load the page unless DO_NOT_LOAD_PAGE is set - used for existing EXLM pages POC
-if (!window.hlx.DO_NOT_LOAD_PAGE) {
-  const { lang } = getPathDetails();
-  document.documentElement.lang = lang || 'en';
-  if (isProfilePage()) {
-    if (window.location.href.includes('.html')) {
-      loadPage();
-    } else {
-      await loadIms();
-      if (window?.adobeIMS?.isSignedInUser()) {
+(async () => {
+  if (!window.hlx.DO_NOT_LOAD_PAGE) {
+    const { lang } = getPathDetails();
+    const { isProd, personalizedHomeLink } = getConfig() || {};
+    document.documentElement.lang = lang || 'en';
+    if (isProfilePage()) {
+      if (window.location.href.includes('.html')) {
         loadPage();
       } else {
-        await window?.adobeIMS?.signIn();
+        await loadIms();
+        if (window?.adobeIMS?.isSignedInUser()) {
+          loadPage();
+        } else {
+          await window?.adobeIMS?.signIn();
+        }
       }
-    }
-  } else if (isHomePage(lang)) {
-    try {
-      await loadIms();
-      const { personalizedHomeLink } = getConfig() || {};
-      if (window?.adobeIMS?.isSignedInUser() && personalizedHomeLink) {
-        window.location.replace(`${window.location.origin}${personalizedHomeLink}`);
+    } else if (isHomePage(lang) && !isProd) {
+      try {
+        await loadIms();
+        if (window?.adobeIMS?.isSignedInUser() && personalizedHomeLink) {
+          window.location.replace(`${window.location.origin}/${lang}${personalizedHomeLink}`);
+        }
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error during redirect process:', error);
       }
       loadPage();
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Error during redirect process:', error);
+    } else {
+      loadPage();
     }
-  } else {
-    loadPage();
   }
-}
+})();

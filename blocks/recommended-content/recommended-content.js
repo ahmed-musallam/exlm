@@ -1,5 +1,12 @@
 import TabbedCardList from '../../scripts/tabbed-card-list/tabbed-card-list.js';
-import { createTag, fetchLanguagePlaceholders, htmlToElement, getConfig } from '../../scripts/scripts.js';
+import {
+  createTag,
+  fetchLanguagePlaceholders,
+  htmlToElement,
+  getConfig,
+  getPathDetails,
+  getCookie,
+} from '../../scripts/scripts.js';
 import BrowseCardsDelegate from '../../scripts/browse-card/browse-cards-delegate.js';
 import { COVEO_SORT_OPTIONS } from '../../scripts/browse-card/browse-cards-constants.js';
 import { buildCard, buildNoResultsContent } from '../../scripts/browse-card/browse-card.js';
@@ -11,6 +18,80 @@ import {
 import { defaultProfileClient } from '../../scripts/auth/profile.js';
 import Dropdown, { DROPDOWN_VARIANTS } from '../../scripts/dropdown/dropdown.js';
 import BuildPlaceholder from '../../scripts/browse-card/browse-card-placeholder.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
+
+let placeholders = {};
+try {
+  placeholders = await fetchLanguagePlaceholders();
+} catch (err) {
+  // eslint-disable-next-line no-console
+  console.error('Error fetching placeholders:', err);
+}
+
+const { targetCriteriaIds, cookieConsentName } = getConfig();
+
+/**
+ * Listens for the target-recs-ready event to fetch the content as per the given criteria
+ * @param {string} criteriaId - The criteria id to listen for
+ * @returns {Promise}
+ */
+function handleTargetEvent(criteria) {
+  return new Promise((resolve) => {
+    window.exlm?.targetData?.forEach((data) => {
+      if (data?.meta.scope === criteria) resolve(data);
+    });
+    function targetEventHandler(event) {
+      if (event?.detail?.meta.scope === criteria) {
+        document.removeEventListener('target-recs-ready', targetEventHandler);
+        if (!window.exlm.targetData) window.exlm.targetData = [];
+        window.exlm.targetData.push(event.detail);
+        resolve(event.detail);
+      }
+    }
+    document.addEventListener('target-recs-ready', targetEventHandler);
+    setTimeout(() => {
+      document.removeEventListener('target-recs-ready', targetEventHandler);
+      resolve({ data: [] });
+    }, 5000);
+  });
+}
+
+/**
+ * Check if the user has accepted the cookie policy for target
+ * @returns {boolean}
+ */
+function checkTargetSupport() {
+  const value = getCookie(cookieConsentName);
+  if (!value || window.hlx.aemRoot) return false;
+  const cookieConsentValues = value.split(',').map((part) => part[part.length - 1]);
+  if (cookieConsentValues[0] === '1' && cookieConsentValues[1] === '1') {
+    return true;
+  }
+  return false;
+}
+
+function targetDataAdapter(data) {
+  const articlePath = `/${getPathDetails().lang}${data?.path}`;
+  const fullURL = new URL(articlePath, window.location.origin).href;
+  const solutions = data?.product.split(',').map((s) => s.trim());
+  return {
+    ...data,
+    badgeTitle: data?.contentType,
+    type: data?.contentType,
+    authorInfo: data?.authorInfo || {
+      name: [''],
+      type: [''],
+    },
+    product: solutions,
+    tags: [],
+    copyLink: fullURL,
+    bookmarkLink: '',
+    viewLink: fullURL,
+    viewLinkText: placeholders[`browseCard${convertToTitleCase(data?.contentType)}ViewLabel`]
+      ? placeholders[`browseCard${convertToTitleCase(data?.contentType)}ViewLabel`]
+      : `View ${data?.contentType}`,
+  };
+}
 
 async function fetchInterestData() {
   try {
@@ -31,21 +112,17 @@ async function fetchInterestData() {
 }
 
 const interestDataPromise = fetchInterestData();
-let placeholders = {};
-try {
-  placeholders = await fetchLanguagePlaceholders();
-} catch (err) {
-  // eslint-disable-next-line no-console
-  console.error('Error fetching placeholders:', err);
-}
 
 const ALL_MY_OPTIONS_KEY = placeholders?.allMyProducts || 'All my products';
+const ALL_ADOBE_OPTIONS_KEY = placeholders?.allAdobeProducts || 'All Adobe Products';
 
 /**
  * Decorate function to process and log the mapped data.
  * @param {HTMLElement} block - The block of data to process.
  */
 export default async function decorate(block) {
+  let targetSupport = checkTargetSupport();
+
   // Extracting elements from the block
   const htmlElementData = [...block.children].map((row) => row.firstElementChild);
   const [headingElement, descriptionElement, filterSectionElement, ...remainingElements] = htmlElementData;
@@ -64,7 +141,10 @@ export default async function decorate(block) {
   const isDesktop = window.matchMedia('(min-width:900px)').matches;
   const reversedDomElements = remainingElements.reverse();
   const [firstEl, secondEl, targetCriteria, thirdEl, fourthEl, fifthEl, ...otherEl] = reversedDomElements;
-  console.log(targetCriteria);
+  const targetCriteriaId = targetCriteria.textContent.trim();
+  if (targetSupport) {
+    targetSupport = Object.values(targetCriteriaIds).indexOf(targetCriteriaId) > -1;
+  }
   const sortByContent = thirdEl?.innerText?.trim();
   const contentTypes = otherEl?.map((contentTypeEL) => contentTypeEL?.innerText?.trim()).reverse();
   const contentTypesFetchMap = contentTypes.reduce((acc, curr) => {
@@ -108,15 +188,24 @@ export default async function decorate(block) {
     ? profileRoles
     : fourthEl?.innerText?.trim().split(',').filter(Boolean);
 
-  filterOptions.unshift(ALL_MY_OPTIONS_KEY);
+  const defaultOptionsKey = profileInterests.length === 0 ? ALL_ADOBE_OPTIONS_KEY : ALL_MY_OPTIONS_KEY;
+  filterOptions.unshift(defaultOptionsKey);
+  const [defaultFilterOption = ''] = filterOptions;
 
   const renderDropdown = isDesktop ? filterOptions?.length > 4 : true;
   const numberOfResults = contentTypeIsEmpty ? 4 : 1;
-  const [defaultFilterOption = ''] = filterOptions;
 
   const buildCardsShimmer = new BuildPlaceholder(contentTypeIsEmpty ? numberOfResults : contentTypes.length);
 
-  const fetchDataAndRenderBlock = (optionType) => {
+  const recommendedContentNoResults = () => {
+    const recommendedContentNoResultsElement = block.querySelector('.browse-card-no-results');
+    const noResultsText =
+      placeholders?.recommendedContentNoResultsText ||
+      `We couldn’t find specific matches, but here are the latest tutorials/articles that others are loving right now!`;
+    recommendedContentNoResultsElement.innerHTML = noResultsText;
+  };
+
+  const fetchDataAndRenderBlock = async (optionType) => {
     const contentDiv = block.querySelector('.recommended-content-block-section');
     const currentActiveOption = contentDiv.dataset.selected;
     const lowercaseOptionType = optionType?.toLowerCase();
@@ -124,7 +213,7 @@ export default async function decorate(block) {
       return;
     }
     contentDiv.dataset.selected = lowercaseOptionType;
-    const showProfileOptions = lowercaseOptionType === ALL_MY_OPTIONS_KEY.toLowerCase();
+    const showProfileOptions = lowercaseOptionType === defaultOptionsKey.toLowerCase();
     const interest = filterOptions.find((opt) => opt.toLowerCase() === lowercaseOptionType);
     const expLevelIndex = sortedProfileInterests.findIndex((s) => s === interest);
     const expLevel = experienceLevels[expLevelIndex] ?? 'Beginner';
@@ -137,7 +226,6 @@ export default async function decorate(block) {
       // show everything for default tab
       clonedProducts = [...new Set([...products, ...sortedProfileInterests])];
     }
-    console.log({ sortedProfileInterests, clonedProducts, products });
     const params = {
       contentType: null,
       product: clonedProducts,
@@ -158,37 +246,60 @@ export default async function decorate(block) {
     if (noResultsContent) {
       noResultsContent.remove();
     }
-    const cardPromises = contentTypeIsEmpty
-      ? [BrowseCardsDelegate.fetchCardData(params)]
-      : Object.keys(contentTypesFetchMap).map((contentType) => {
-          const payload = {
-            ...params,
-          };
-          if (contentType) {
-            payload.contentType = [contentType];
-          }
-          if (contentTypesFetchMap[contentType]) {
-            payload.noOfResults = contentTypesFetchMap[contentType];
-          }
+    let cardPromises = [];
+    if (targetSupport) {
+      cardPromises.push(handleTargetEvent(targetCriteriaId));
+    } else {
+      cardPromises = contentTypeIsEmpty
+        ? [BrowseCardsDelegate.fetchCardData(params)]
+        : Object.keys(contentTypesFetchMap).map((contentType) => {
+            const payload = {
+              ...params,
+            };
+            if (contentType) {
+              payload.contentType = [contentType];
+            }
+            if (contentTypesFetchMap[contentType]) {
+              payload.noOfResults = contentTypesFetchMap[contentType];
+            }
 
-          return new Promise((resolve) => {
-            BrowseCardsDelegate.fetchCardData(payload)
-              .then((data) => {
-                const [ct] = payload.contentType || [''];
-                resolve({
-                  contentType: ct,
-                  data,
+            return new Promise((resolve) => {
+              BrowseCardsDelegate.fetchCardData(payload)
+                .then((data) => {
+                  const [ct] = payload.contentType || [''];
+                  resolve({
+                    contentType: ct,
+                    data,
+                  });
+                })
+                .catch(() => {
+                  resolve({});
                 });
-              })
-              .catch(() => {
-                resolve({});
-              });
+            });
           });
-        });
+    }
     Promise.all(cardPromises)
       .then((cardResponses) => {
         let data;
-        if (contentTypeIsEmpty) {
+        if (targetSupport) {
+          data = cardResponses[0].data;
+          if (params.context.interests.length) {
+            if (optionType.toLowerCase() === defaultOptionsKey.toLowerCase()) {
+              data = data.filter((pageData) =>
+                params.context.interests.some((ele) => pageData.product.toLowerCase().includes(ele.toLowerCase())),
+              );
+            } else {
+              data = data.filter((pageData) => pageData.product.toLowerCase().includes(optionType.toLowerCase()));
+            }
+          }
+          const cardData = [];
+          let i = 0;
+          while (cardData.length < 4 && i < data.length) {
+            cardData.push(targetDataAdapter(data[i]));
+            i += 1;
+          }
+          data = cardData;
+        } else if (contentTypeIsEmpty) {
           data = cardResponses?.flat() || [];
         } else {
           data = contentTypes.reduce((acc, curr) => {
@@ -213,6 +324,7 @@ export default async function decorate(block) {
         } else {
           buildCardsShimmer.remove();
           buildNoResultsContent(contentDiv, true);
+          recommendedContentNoResults(contentDiv);
           contentDiv.style.display = 'block';
         }
 
@@ -227,6 +339,7 @@ export default async function decorate(block) {
         // Hide shimmer placeholders on error
         buildCardsShimmer.remove();
         buildNoResultsContent(contentDiv, true);
+        recommendedContentNoResults(contentDiv);
         contentDiv.style.display = 'block';
         /* eslint-disable-next-line no-console */
         console.error(err);
@@ -359,4 +472,5 @@ export default async function decorate(block) {
       onTabFormReady: onTabReady,
     });
   }
+  await decorateIcons(block);
 }
