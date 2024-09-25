@@ -1,3 +1,7 @@
+/**
+ * clone the provided script, which maybe marked as "unexecutable", to a new script to execute it.
+ * @param {HTMLScriptElement} oldScript
+ */
 function executeScript(oldScript) {
   const newScript = document.createElement('script');
   if (oldScript.src) {
@@ -17,12 +21,14 @@ export default async function decorate(block) {
   const props = [...block.children].map((row) => row.firstElementChild);
   const htmlIndexUrl = props[0]?.textContent;
 
+  // fetch + parse the html
   const response = await fetch(htmlIndexUrl);
   const html = await response.text();
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
   const { body, head } = doc;
-  // clear block:
+
+  // clear block
   block.innerHTML = '';
 
   const appDiv = document.createElement('div');
@@ -31,14 +37,12 @@ export default async function decorate(block) {
   for (const { name, value } of body.attributes) {
     appDiv.setAttribute(name, value);
   }
-  appDiv.setHTMLUnsafe(body.querySelector('main').innerHTML);
-  block.append(appDiv);
+  // add everything in main to the block, allow declarative shadow roots.
+  block.setHTMLUnsafe(body.querySelector('main').innerHTML);
+
   // append everything in the head to the document head
   [...head.children].forEach((child) => {
-    if (child.tagName === 'SCRIPT') {
-      executeScript(child);
-    } else {
-      document.head.appendChild(child);
-    }
+    if (child.tagName === 'SCRIPT') executeScript(child);
+    else document.head.appendChild(child);
   });
 }
